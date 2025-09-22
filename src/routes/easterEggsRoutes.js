@@ -1,9 +1,11 @@
 import express from "express"; 
-import { getAllEaster, getEasterById } from "../controllers/easterEggsControllers.js";
+import { createEasterEgg, getAllEaster, getEasterById } from "../controllers/easterEggsControllers.js";
 
 const router = express.Router();
 
 router.get("/", getAllEaster);
 router.get("/:id", getEasterById);
+router.post("/", createEasterEgg);
+
 
 export default router; 
