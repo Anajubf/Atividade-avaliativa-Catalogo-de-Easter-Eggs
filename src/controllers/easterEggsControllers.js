@@ -8,6 +8,74 @@ const getAllEaster = (req, res) => {
     })
 }
 
+const tipoMidia = (req, res) => {
+    let id = parseInt(req.params.id);
+const midia = midias.find(m => m.id === id);
+
+    if (midia) {
+        res.status(200).json({
+            success: true,
+            midia: midia
+        })
+    }
+
+    res.status(400).json({
+        success: false,
+        message: "Midia nao encontrada"
+    })
+}
+
+const tipoEaster = (req, res) => {
+    let id = parseInt(req.params.id);
+const easterTipo = easters.find(t => t.id === id);
+
+    if (easterTipo) {
+        res.status(200).json({
+            success: true,
+            easterTipo: easterTipo
+        })
+    }
+
+    res.status(400).json({
+        success: false,
+        message: "Tipo nao encontrado"
+    })
+}
+
+const dificuldadeTipo = (req, res) => {
+    let id = parseInt(req.params.id);
+const dificuldade = dificuldades.find(d => d.id === id);
+
+    if (dificuldade) {
+        res.status(200).json({
+            success: true,
+            dificuldade: dificuldade
+        })
+    }
+
+    res.status(400).json({
+        success: false,
+        message: "Dificuldade nao encontrada"
+    })
+}
+
+const descobertaStutus = (req, res) => {
+    let id = parseInt(req.params.id);
+const descoberta = descobertas.find(d => d.id === id);
+
+    if (descoberta) {
+        res.status(200).json({
+            success: true,
+            descoberta: descoberta
+        })
+    }
+
+    res.status(400).json({
+        success: false,
+        message: "Descoberta nao encontrada"
+    })
+}
+
 const getEasterById = (req, res) => {
     let id = parseInt(req. params.id);
 
@@ -118,5 +186,70 @@ const deleteEasterEgg = (req, res) => {
     })
 }
 
+/*const updateEasterEgg = (req, res) => {
+    const id = parseInt(req.params.id);
+    const {titulo, midia, tipo, descricao, dificuldade, descoberto, autor, verificado } = req.body;
 
-export { getAllEaster, getEasterById, createEasterEgg, deleteEasterEgg };
+    const tipoDificuldade = ["Fácil", "Médio", "Difícil", "Impossível"];
+
+    if (isNaN(id)) {
+        return res.status(400).json({
+            success: false,
+            message: "O id deve ser válido"
+        });
+    }
+
+    const easterEggExiste = easterEggs.find(e => e.id === id);
+
+    if (!easterEggExiste) {
+        return res.status(404).json({
+            success: false,
+            message: "Easter egg não existe"
+        });
+    }
+    
+    if(descricao.length < 10) {
+        return res.status(400).json({
+            success: false, 
+            message: "A 'descricão' deve ter pelo menos 10 caracteres"
+        })
+    }
+
+    if (!dificuldade || tipoDificuldade.includes(dificuldade.toLowerCase())) {
+        return res.status(400).json({
+            success: false,
+            message: `A dificuldade "${dificuldade}" não é válido. Tipos permitidos: ${tipoDificuldade.join(", ")}.`
+        });
+    }
+    }
+        
+
+    const easterEggsAtualizados = easterEggs.map(easter => {
+        easter.id === id
+            ? {
+                ...titulo,
+                ...(midia      && { midia }),
+                ...(idade    && { idade }),
+                ...(tipo  && { tipo }),
+                ...(descricao      && { descricao }),
+                ...(dificuldade      && { dificuldade }),
+                ...(descoberto      && { descoberto }),
+                ...(autor      && { autor }),
+                ...(verificado      && { verificado }),
+                
+            }
+            : easter;
+    });
+    
+    easterEggs.splice(0, easterEggs.length, ...easterEggsAtualizados);
+
+    const easterEggNova = easterEggs.find(easter => easter.id === id);
+
+    res.status(200).json({
+        success: true,
+        message: "Dados atualizados com sucesso",
+        easter: easterEggNova
+    })
+*/
+
+export { getAllEaster, getEasterById, createEasterEgg, deleteEasterEgg, tipoEaster, tipoMidia, dificuldadeTipo, descobertaStutus};
