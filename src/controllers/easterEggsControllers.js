@@ -99,4 +99,24 @@ const createEasterEgg = (req, res) => {
     })
 }
 
-export { getAllEaster, getEasterById, createEasterEgg };
+const deleteEasterEgg = (req, res) => {
+    let id = parseInt(req.params.id);
+    const easterEggParaRemover = easterEggs.find(e => e.id === id);
+
+    if (!easterEggParaRemover) {
+        return res.status(404).json({
+            success: false,
+            message: 'Este easter egg nao existe'
+        })
+    }
+    const easterEggFiltrado = easterEggs.filter(easter => easter.id !== id);
+    easterEggs.splice(0, easterEggs.length, ...easterEggFiltrado);
+    res.status(200).json({
+        success: true,
+        message: 'Easter Egg deletado com sucesso',
+        easterEggRemovido: easterEggParaRemover
+    })
+}
+
+
+export { getAllEaster, getEasterById, createEasterEgg, deleteEasterEgg };
